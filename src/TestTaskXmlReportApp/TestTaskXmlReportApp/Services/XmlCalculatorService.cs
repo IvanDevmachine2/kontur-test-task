@@ -30,7 +30,7 @@ namespace TestTaskXmlReportApp.Services
         /// </summary>
         private string DetermineXsltPath(string inputXmlPath)
         {
-            string fileName = Path.GetFileName(inputXmlPath).ToLower();
+            string fileName = Path.GetFileName(inputXmlPath);
 
             return fileName switch
             {
