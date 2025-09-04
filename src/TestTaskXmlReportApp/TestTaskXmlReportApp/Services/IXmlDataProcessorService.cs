@@ -11,7 +11,8 @@
         void AddTotalSalaryAttribute(string xmlPath);
 
         /// <summary>
-        /// Добавление в исходный файл Data1.xml атрибут с указанием суммы всех указанных заработных плат
+        /// Добавление в исходный файл Data1.xml атрибут с указанием суммы всех указанных заработных плат (вызывается только при
+        /// получении Data1.xml в качестве исходного XML!)
         /// </summary>
         void AddTotalAmountToData1(string data1Path);
     }

@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
+using System.Linq;
 using System.Globalization;
+using System;
 
 namespace TestTaskXmlReportApp.Services
 {
@@ -14,7 +16,7 @@ namespace TestTaskXmlReportApp.Services
                 decimal salarySum = 0;
                 foreach (var salaryElem in employeeElem.Elements("salary"))
                 {
-                    string amountValue = salaryElem.Attribute("amount")?.Value;
+                    string amountValue = NormalizeNumber(salaryElem.Attribute("amount")?.Value);
                     if (decimal.TryParse(amountValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal amount))
                     {
                         salarySum += amount;
@@ -44,6 +46,17 @@ namespace TestTaskXmlReportApp.Services
             doc.Root?.SetAttributeValue("amount_sum", amountSum.ToString(CultureInfo.InvariantCulture));
 
             doc.Save(data1Path);
+        }
+
+        /// <summary>
+        /// Простая нормализация записи дробных чисел
+        /// </summary>
+        private string NormalizeNumber(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return value;
+
+            return value.Replace(',', '.');
         }
     }
 }

@@ -26,7 +26,7 @@ namespace TestTaskXmlReportApp.Services
         }
 
         /// <summary>
-        /// Выбор подходящего xslt по названию переданного файла
+        /// Выбор подходящего xslt по названию запрашиваемого xml-файла
         /// </summary>
         private string DetermineXsltPath(string inputXmlPath)
         {

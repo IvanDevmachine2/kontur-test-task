@@ -11,8 +11,8 @@
   <ItemGroup>
     <None Remove="Data1.xml" />
     <None Remove="Data2.xml" />
-    <None Remove="Data\Output\Data1ToEmployees.xslt" />
-    <None Remove="Data\Output\Data2ToEmployees.xslt" />
+    <None Remove="Data\Transformers\Data1ToEmployees.xslt" />
+    <None Remove="Data\Transformers\Data2ToEmployees.xslt" />
     <None Remove="Employees.xml" />
   </ItemGroup>
 
@@ -23,10 +23,10 @@
     <Content Include="Data2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Output\Data1ToEmployees.xslt">
+    <Content Include="Data\Transformers\Data1ToEmployees.xslt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Output\Data2ToEmployees.xslt">
+    <Content Include="Data\Transformers\Data2ToEmployees.xslt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Employees.xml">

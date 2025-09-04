@@ -1,13 +1,26 @@
 ﻿<Window x:Class="TestTaskXmlReportApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TestTaskXmlReportApp"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <Button x:Name="CalculationButton" Content="Произвести пересчёт" Click="CalculationButton_Click"/>
-        <DataGrid x:Name="EmployeesDataGrid"/>
-    </StackPanel>
+        Title="XML Report Transformer" Height="600" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Управление функционалом -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <ComboBox x:Name="SourceFileComboBox" Width="150" Margin="0,0,80,0">
+                <ComboBoxItem Content="Data1.xml"/>
+                <ComboBoxItem Content="Data2.xml"/>
+            </ComboBox>
+            <Button x:Name="CalculateButton" Content="Рассчитать и выгрузить" 
+                    Click="CalculateButton_Click" Padding="8"/>
+        </StackPanel>
+
+        <!-- Таблица для отображения результатов -->
+        <DataGrid Grid.Row="1" x:Name="EmployeesDataGrid" Margin="10" AutoGenerateColumns="True"
+                  IsReadOnly="True" AlternatingRowBackground="LightGray"/>
+
+    </Grid>
 </Window>
