@@ -65,6 +65,68 @@ namespace TestTaskXmlReportApp
             }
         }
 
+        private void AddItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(NewNameTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(NewSurnameTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(NewAmountTextBox.Text) ||
+                    NewMountComboBox.SelectedItem == null)
+                {
+                    MessageBox.Show("Заполните все поля для добавления записи");
+                    return;
+                }
+
+                string mount = (NewMountComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+                if (string.IsNullOrEmpty(mount))
+                {
+                    MessageBox.Show("Выберите месяц");
+                    return;
+                }
+
+                AddNewItemToData1(
+                    NewNameTextBox.Text.Trim(),
+                    NewSurnameTextBox.Text.Trim(),
+                    NewAmountTextBox.Text.Trim(),
+                    mount
+                );
+
+                // Очистка полей ввода новых данных о сотрудниках после нажатия на кнопку добавления данных нового сотрудника
+                NewNameTextBox.Clear();
+                NewSurnameTextBox.Clear();
+                NewAmountTextBox.Clear();
+                NewMountComboBox.SelectedIndex = 0;
+
+                CalculateButton_Click(sender, e);
+
+                MessageBox.Show("Запись добавлена и данные пересчитаны!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении записи: {ex.Message}", "Ошибка",
+                              MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddNewItemToData1(string name, string surname, string amount, string mount)
+        {
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string data1Path = Path.Combine(baseDirectory, "Data", "Input", "Data1.xml");
+
+            XDocument doc = XDocument.Load(data1Path);
+
+            XElement newItem = new XElement("item",
+                new XAttribute("name", name),
+                new XAttribute("surname", surname),
+                new XAttribute("amount", amount),
+                new XAttribute("mount", mount)
+            );
+
+            doc.Root?.Add(newItem);
+            doc.Save(data1Path);
+        }
+
         private void LoadResultsToDataGrid(string xmlPath)
         {
             XDocument doc = XDocument.Load(xmlPath);
@@ -74,7 +136,7 @@ namespace TestTaskXmlReportApp
                 {
                     Name = e.Attribute("name")?.Value,
                     Surname = e.Attribute("surname")?.Value,
-                    TotalSalary = e.Attribute("total_salary")?.Value,
+                    TotalSalary = e.Attribute("salary_sum")?.Value,
                     Salaries = string.Join("; ", e.Elements("salary")
                         .Select(s => $"{s.Attribute("mount")?.Value}: {s.Attribute("amount")?.Value}"))
                 }).ToList();

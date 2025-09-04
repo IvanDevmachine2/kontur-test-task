@@ -5,6 +5,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -18,8 +19,49 @@
                     Click="CalculateButton_Click" Padding="8"/>
         </StackPanel>
 
+        <!-- Панель для добавления записей в Data1.xml и запуска пересчёта выводимых на GUI и в 
+        Employees.xml данных -->
+        <GroupBox Grid.Row="1" Header="Добавить новую запись в Data1.xml" Margin="10,5,10,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Имя:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBox x:Name="NewNameTextBox" Width="100" Margin="5" ToolTip="Введите имя"/>
+                <TextBlock Text="Фамилия:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBox x:Name="NewSurnameTextBox" Width="100" Margin="5" ToolTip="Введите фамилию"/>
+                <TextBlock Text="Выплачено:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBox x:Name="NewAmountTextBox" Width="80" Margin="5" ToolTip="Введите сумму выплаты"/>
+                <TextBlock Text="Месяц:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                <ComboBox x:Name="NewMountComboBox" Width="100" Margin="5" SelectedIndex="0" ToolTip="Выберите месяц">
+                    <ComboBox.Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ComboBox.Style>
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                    <ComboBoxItem Content="january"/>
+                    <ComboBoxItem Content="february"/>
+                    <ComboBoxItem Content="march"/>
+                    <ComboBoxItem Content="april"/>
+                    <ComboBoxItem Content="may"/>
+                    <ComboBoxItem Content="june"/>
+                    <ComboBoxItem Content="july"/>
+                    <ComboBoxItem Content="august"/>
+                    <ComboBoxItem Content="september"/>
+                    <ComboBoxItem Content="october"/>
+                    <ComboBoxItem Content="november"/>
+                    <ComboBoxItem Content="december"/>
+                </ComboBox>
+                <Button x:Name="AddItemButton" Content="Добавить и пересчитать" 
+                Click="AddItemButton_Click" Margin="5" Padding="8" ToolTip="Добавить новую запись и пересчитать все данные"/>
+            </StackPanel>
+        </GroupBox>
+
         <!-- Таблица для отображения результатов -->
-        <DataGrid Grid.Row="1" x:Name="EmployeesDataGrid" Margin="10" AutoGenerateColumns="True"
+        <DataGrid Grid.Row="2" x:Name="EmployeesDataGrid" Margin="10" AutoGenerateColumns="True"
                   IsReadOnly="True" AlternatingRowBackground="LightGray"/>
 
     </Grid>

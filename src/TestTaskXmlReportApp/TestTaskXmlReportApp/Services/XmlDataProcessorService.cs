@@ -36,7 +36,7 @@ namespace TestTaskXmlReportApp.Services
             decimal amountSum = 0;
             foreach (var itemElem in doc.Descendants("item"))
             {
-                string amountValue = itemElem.Attribute("amount")?.Value;
+                string amountValue = NormalizeNumber(itemElem.Attribute("amount")?.Value);
                 if (decimal.TryParse(amountValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal amount))
                 {
                     amountSum += amount;
